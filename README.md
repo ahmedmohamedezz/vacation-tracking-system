@@ -148,7 +148,7 @@ requests pending approval by subordinate employees. The manager selects each of 
 14. Whether a request is approved or rejected, an e-mail notification is immediately sent to the employee who made the request. The manager’s screen returns to the main VTS home page, and the manager may approve other outstanding requests, make a request for him- or
 herself, or simply leave the VTS application.
 
-![manage time use case](./manage-time-use-case.png)
+![Manage Time Use Case Diagram](./manage-time-use-case.png)
 
 #### Notes on main flow
 
@@ -158,4 +158,72 @@ herself, or simply leave the VTS application.
   - atomic technical operations (choose date, fill username)
   - trigger mail sent event (not a use-case, but action outcomes)
 
-![Manage Time Use Case Diagram](./manage-time-use-casepng.png)
+---
+
+### Data Model & ERD
+
+#### Classes
+
+- Employee (name, email, password, isManager, managerId, _primaryLocationId_)
+
+- Location (name, lat, lng, addressText)
+
+- VacationRequest (_employeeId_, category, startDate, endDate, title, description, needsApproval, approvedAt, rejectedAt, rejectioneExplanation, status)
+
+- RequestCategory (name, description)
+
+- VacationBalance (_employeeId_, _categoryId_, hours, expiresAt, active)
+
+- Restriction (_vacationBalanceId_, name, description)
+
+#### Enums
+
+- RequestStatus (PENDING, APPROVED, REJECTED, CANCELLED)
+
+![manage time ERD](./manage-time-erd.png)
+
+#### Notes on Data Model (Design Decisions)
+
+- should categories be modeled as `enums`, or separate `entities` ?
+  - if it has no behavior (just a type), it doesn't need to be an entity (classes are about behavior)
+  - if it has logic, or we need to keep track of audit information about them (when created, active/not, ...), it should be an entity
+  - we need to keep track of balance associated with each category for each employee => better to model it as an entity
+
+- when to use `isApproved` vs. `approvedAt`?
+  - boolean flags are better for storage optimization
+  - timestamps are better for auditity
+  - since the system needs to log every trx, we may need timestamps
+
+---
+
+### Flowchart
+
+![manage time flowchart](./manage-time-flowchart.png)
+
+---
+
+### Sequence Diagram
+
+![manage time sequence diagram](./manage-time-sequence-diagram.png)
+
+---
+
+### Pseudocode
+
+```java
+submitVacationRequest(data) {
+
+  errors = validate(data);
+  if (errors.length > 0) {
+      return Bad_Request(errors);
+  }
+
+  if (data.needsApproval) {
+      sendEmailToManagers(data);
+  } else {
+      data.request.status = STATUS.APPROVED;
+  }
+
+  return Ok();
+}  
+```
