@@ -38,10 +38,6 @@
 
 - Implements a **flexible** rules-based system for validating and verifying leave time requests
 
-- Uses existing hardware and middleware
-
-- Is implemented as an extension to the existing intranet portal system, and uses the portal’s single-sign-on mechanisms for all authentication
-
 ## Notes Regarding Non-Fucntional Requirements
 
 > such a vague requirement that should never be recorded as an official requirement can make the system fail if not met from the endusers point-of-view
@@ -110,7 +106,7 @@
 
 #### Use Case Name: Manage Time
 
-#### Actors: employees
+#### Actors: employees, managers
 
 #### Goal: employee submits a request for vacation time
 
