@@ -52,7 +52,7 @@ requests pending approval by subordinate employees. The manager selects each of 
 14. Whether a request is approved or rejected, an e-mail notification is immediately sent to the employee who made the request. The manager’s screen returns to the main VTS home page, and the manager may approve other outstanding requests, make a request for him- or
 herself, or simply leave the VTS application.
 
-![Manage Time Use Case Diagram](../images/manage-time-use-case.png)
+![Manage Time Use Case Diagram](./images/manage-time-use-case.png)
 
 ### Notes on main flow
 
@@ -68,47 +68,37 @@ herself, or simply leave the VTS application.
 
 ### Classes
 
-- Employee (name, email, password, isManager, managerId, _primaryLocationId_)
-
-- Location (name, lat, lng, addressText)
-
-- VacationRequest (_employeeId_, category, startDate, endDate, title, description, needsApproval, approvedAt, rejectedAt, rejectioneExplanation, status)
-
-- RequestCategory (name, description)
-
-- VacationBalance (_employeeId_, _categoryId_, hours, expiresAt, active)
-
-- Restriction (_vacationBalanceId_, name, description)
-
-### Enums
-
-- RequestStatus (PENDING, APPROVED, REJECTED, CANCELLED)
-
-![manage time ERD](../images/manage-time-erd.png)
+![manage time class diagram](./images/manage-time-class-diagram.png)
 
 ### Notes on Data Model (Design Decisions)
 
-- should categories be modeled as `enums`, or separate `entities` ?
+- should we have `VacationType`, `VacationStatus`, `RequestCategories` as entities, or enums?
   - if it has no behavior (just a type), it doesn't need to be an entity (classes are about behavior)
   - if it has logic, or we need to keep track of audit information about them (when created, active/not, ...), it should be an entity
-  - we need to keep track of balance associated with each category for each employee => better to model it as an entity
 
 - when to use `isApproved` vs. `approvedAt`?
   - boolean flags are better for storage optimization
   - timestamps are better for auditity
   - since the system needs to log every trx, we may need timestamps
 
+- why do we store `managerId` in the request? can't we just get it from `Employee` ?
+  - auditing (who approved at the time of that request, as manager may change)
+  - avoid joins for a common/critical operations
+  - current manager maybe busy, so we delegate to another manager (approvedBy)
+
+- at DB-level and App-level, should `Employee`, and `Manager` be the same class?
+
 ---
 
 ## Flowchart
 
-![manage time flowchart](../images/manage-time-flowchart.png)
+![manage time flowchart](./images/manage-time-flowchart.png)
 
 ---
 
 ## Sequence Diagram
 
-![manage time sequence diagram](../images/manage-time-sequence-diagram.png)
+![manage time sequence diagram](./images/manage-time-sequence-diagram.png)
 
 ---
 
