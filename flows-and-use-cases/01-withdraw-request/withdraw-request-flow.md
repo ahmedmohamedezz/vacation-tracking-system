@@ -2,7 +2,7 @@
 
 ## Use Case Name: Withdraw Request
 
-## Actors: employee
+## Actors: employee, manager
 
 ## Goal: employee want to withdraw an outstanding request for vacation time
 
@@ -66,7 +66,6 @@ withdrawVacationRequest(RequestDto dto) {
 service.withdrawRequest(RequestDto dto) throws InvalidRequestException {
   validateDto(dto); // throws InvalidRequestException
   reqRepo.save(dto.toEntity());
-  empRepo.updateBalance(dto.hours);
   notifyManager(dto.managerId);
 }
 
