@@ -1,17 +1,5 @@
 # Manage Time Flow
 
-- while building a system, we should start with the most siginificant features that shape the project architecture and the system’s behavior
-
-- the core use-case of the system is to allow employees to manage their vacation time (Manage Time)
-
-- we will follow this for formatting use cases:
-  - use case name
-  - actors
-  - goal
-  - preconditions
-  - main flow
-  - alternate flows
-
 ## Use Case Name: Manage Time
 
 ## Actors: employees, managers

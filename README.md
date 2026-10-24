@@ -48,6 +48,23 @@
 
 ## Flows and Use Cases
 
-> for each use case, you will find a dedicated markdown file containing the use-case description, actors, goal, preconditions, flow, data model, flowchart, and pseudocode
+- while building a system, we should start with the most siginificant features that shape the project architecture and the system’s behavior
 
-1. **Manage Time**: happy scenario. allow employees to manage their vacations (sick leave, personal time off, ...).
+- the core use-case of the system is to allow employees to manage their vacation time (Manage Time)
+
+> each use-case (main/alternate) flow will be in a dedicated directory
+
+- we will follow this for formatting use cases:
+  - use case name
+  - actors
+  - goal
+  - preconditions
+  - main flow
+  - data model
+  - alternate flows (seprate from main flow)
+
+### Use Cases
+
+1. **Manage Time**: happy scenario. allow employees to manage their vacations (sick leave, personal time off, ...)
+
+2. **Withdraw Request** (alternate flow from `Manage Time`): The employee wants to withdraw an outstanding request for vacation time
