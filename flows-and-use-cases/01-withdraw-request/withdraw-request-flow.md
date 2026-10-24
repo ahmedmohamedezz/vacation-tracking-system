@@ -60,7 +60,7 @@
 @PutMapping("/requests/withdraw")
 withdrawVacationRequest(RequestDto dto) {
     ApiResponse res = service.withdrawRequest(dto);
-    return Response.status(e.status).body(e.getBody());
+    return res;
 }
 
 service.withdrawRequest(RequestDto dto) throws InvalidRequestException {
