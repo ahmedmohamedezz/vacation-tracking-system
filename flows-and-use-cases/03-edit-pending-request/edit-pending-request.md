@@ -22,7 +22,7 @@
 
 3. The employee selects a request to edit, one that is pending approval.
 
-4. The VTS displays an editable view of the request. The employee is allowed to change the title, comments, or dates. The employee can also choose to delete or withdraw this request.
+4. The VTS displays an editable view of the request. The employee is allowed to change the title, comments, or dates. The employee can also choose to **delete** or **withdraw** this request.
 
 5. The employee changes request information and submits the changes to the system.
 
