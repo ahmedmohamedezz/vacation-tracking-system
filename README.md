@@ -46,6 +46,12 @@
 
 ---
 
+## Request State Machine
+
+![request state machine](./images/request-state-machine-diagram.png)
+
+---
+
 ## Flows and Use Cases
 
 - while building a system, we should start with the most siginificant features that shape the project architecture and the system’s behavior
