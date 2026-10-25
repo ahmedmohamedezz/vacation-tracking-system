@@ -52,6 +52,18 @@
 
 ---
 
+## UI Wire Frames
+
+### Web Version
+
+![UI web frame](./images/ui-web-frame.png)
+
+### Mobile Version
+
+![UI mobile frame](./images/ui-mobile-frame.png)
+
+---
+
 ## Flows and Use Cases
 
 - while building a system, we should start with the most siginificant features that shape the project architecture and the system’s behavior
@@ -74,3 +86,19 @@
 1. **Manage Time**: happy scenario. allow employees to manage their vacations (sick leave, personal time off, ...)
 
 2. **Withdraw Request** (alternate flow from `Manage Time`): The employee wants to withdraw an outstanding request for vacation time
+
+---
+
+## Questions
+
+- What if we need to have in the future another status like HR_Pending, HR_Approval with minimum change? how would it be implemented using the minimum code changes?
+
+> separate the request state for different enum values, using the **state design pattern**
+
+```text
+1. Add a new ENUM Values for RequestStatus: HR_Pending, HR_Approval
+
+2. Define the request object state for those new values
+
+3. Add/Adjust a new state machine transition for those new values without affecting other states
+```
